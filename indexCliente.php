@@ -29,7 +29,7 @@ if (isset($_GET['name'])) {
             <button type="submit"   class="btn btn-info">Pesquisar</button>
         </form> 
         <div class="col-lg-offset-11">
-            <a href="inserir.php"   class="btn btn-primary">Inserir<a/>
+            <a href="inserirCliente.php"   class="btn btn-primary">Inserir<a/>
         </div>
     </div>
     <hr class="divider">

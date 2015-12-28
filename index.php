@@ -32,7 +32,7 @@ if (isset($_POST['usuario'])) {
             </div>
             <div class="col-lg-offset-5 col-lg-2">
                 <label class="control-label">senha</label>
-                <input class="form-control" name="senha" />
+                <input type="password" class="form-control" name="senha" />
             </div>
 
             <div class="col-lg-12">
