@@ -1,4 +1,7 @@
 <?php
+
+require_once './header.php';
+
 require_once './Cliente.php';
 //Cria uma instancia de clientes
 $Cliente = new Cliente();
@@ -6,9 +9,8 @@ $Cliente = new Cliente();
 if (isset($_GET['name'])){
     $Cliente->setName($_GET['name']);
     $mensagem = $Cliente->inserir();
-    header("location:index.php");
+    header("location:indexCliente.php");
 }
-require_once './header.php';
 ?>
 <div class="container">
     <h1>Inclusão de Clintes</h1>
@@ -25,7 +27,7 @@ require_once './header.php';
             <hr class="divider">
             <div class="btn-group">
                 <button class="btn btn-success " type="submit" name="btnSubmit"><span class="glyphicon glyphicon-check"/>&nbsp;Salvar</button>
-                <a class="btn btn-primary" href="index.php"><span class="glyphicon glyphicon-chevron-left"/>&nbsp;Voltar</a>
+                <a class="btn btn-primary" href="indexCliente.php"><span class="glyphicon glyphicon-chevron-left"/>&nbsp;Voltar</a>
             </div>
         </form> 
     </div>

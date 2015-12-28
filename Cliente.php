@@ -7,6 +7,7 @@ class Cliente {
     private $id;
 
     public function __construct(\PDO $db = null) {
+        $this->checaLogin();
         if ($db === null) {
             try {
                 $db = new \PDO('mysql:host=localhost;dbname=pdo', 'root', 'root');
@@ -19,12 +20,26 @@ class Cliente {
         $this->db = $db;
     }
 
+    public function checaLogin() {
+        if (!isset($_SESSION['login'])) {
+            header('location:menu.php?msg=Somente usuários logados podem gerenciar o cadastro de alunos');
+        }
+    }
+
     public function find($id) {
         $query = 'select * from clientes where id = :id';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function buscar($texto) {
+        $query = 'select * from clientes where name like :nome';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':nome', '%' . $texto . '%');
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function listar() {

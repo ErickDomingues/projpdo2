@@ -1,50 +1,47 @@
 <?php
-require_once './Cliente.php';
-//Cria uma instancia de clientes
-$Cliente = new Cliente();
-//Lista clientes
-$ArrayClientes = $Cliente->listar();
 
 require_once './header.php';
+
+require_once './Usuario.php';
+
+//Cria uma instancia de clientes
+$Usuario = new Usuario();
+if (isset($_POST['usuario'])) {
+    if (!$Usuario->logar($_POST['usuario'], $_POST['senha'])) {
+        $msg = "Não foi possível efetuar o login, tente novamente.";
+    } else {
+       header('location:menu.php');
+    }
+}
 ?>
-
 <div class="container">
-    <h1>Cadastro de Clientes</h1>
+    <h1>Login</h1>
     <div CLASS="row">
-        <div class="col-lg-offset-11">
-            <a href="inserir.php"   class="btn btn-primary">Inserir<a/>
-        </div>
-    </div>
-    <hr class="divider">
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
+        <form method="post">
+            <div class="col-lg-12">
+                <hr class="divider">
+            </div>
+            <div class="col-lg-12">
+                <?php if (isset($msg)) {
+                    echo $msg;
+                } ?>
+            </div>
+            <div class="col-lg-offset-5 col-lg-2">
+                <label class="control-label">Usuário</label>
+                <input class="form-control" name="usuario" />
+            </div>
+            <div class="col-lg-offset-5 col-lg-2">
+                <label class="control-label">senha</label>
+                <input class="form-control" name="senha" />
+            </div>
 
-            </thead>
-            <tbody>
-                <?php
-                foreach ($ArrayClientes as $ViewClientes) {
-                    ?>
-                    <tr>
-                        <td>
-                            <?php echo $ViewClientes['id']; ?>
-                        </td>
-                        <td >
-                            <?php echo $ViewClientes['name']; ?>
-                        </td>
-                        <td style="width: 300px">
-                            <div class="btn-group">
-                                <a class="glyphicon glyphicon-remove btn btn-danger" href="deletar.php?id=<?php echo $ViewClientes['id']; ?>">deletar</a>
-                                <a class="glyphicon glyphicon-pencil btn btn-success" href="alterar.php?id=<?php echo $ViewClientes['id']; ?>">alterar</a>
-                                <a class="glyphicon glyphicon-zoom-in btn btn-info" href="visualizar.php?id=<?php echo $ViewClientes['id']; ?>">visualizar</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                ?>
-            </tbody>
-        </table>
+            <div class="col-lg-12">
+                <hr class="divider">
+            </div>
+            <div class="col-lg-offset-5 col-lg-2">
+                <button type="submit"   class="btn btn-info">Logar</button>
+            </div>
+        </form> 
     </div>
 
 </div>
